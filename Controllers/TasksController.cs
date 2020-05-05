@@ -43,10 +43,17 @@ namespace TaskManager.Controllers
       [HttpPost]
       public async Task<ActionResult<Models.Task>> Post(Models.Task task)
       {
-          _context.Tasks.Add(task);
-          await _context.SaveChangesAsync();
+          if(ModelState.IsValid)
+          {
+            _context.Tasks.Add(task);
+            await _context.SaveChangesAsync();
 
-          return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
+            return CreatedAtAction(nameof(GetById), new { id = task.Id }, task);
+          }
+          else
+          {
+            throw new BadRequestException ("Ha ocurrido un error al crear la tarea.");
+          }
       }
   }
 

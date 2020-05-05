@@ -40,6 +40,10 @@ namespace TaskManager.CustomExceptions
         {
             return responseJSON(context, exception, (int)HttpStatusCode.BadRequest);
         }
+        if(exception is ConflictException)
+        {
+            return responseJSON(context, exception, (int)HttpStatusCode.Conflict);
+        }
 
         return responseJSON(context, exception, (int)HttpStatusCode.InternalServerError);
     }
