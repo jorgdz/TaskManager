@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using TaskManager.CustomExceptions;
 using TaskManager.Models;
 
 namespace TaskManager
@@ -38,7 +39,9 @@ namespace TaskManager
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
+            app.ConfigureCustomExceptionMiddleware();
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
